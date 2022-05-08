@@ -36,6 +36,19 @@ app.get("/notes", (req, res) =>{
 );
 
 //to do create note post
+app.post("/api/notes", (req, res) => {
+var letters = String.fromCharCode(100 + Math.floor(Math.random() * 26));
+var id = letters + Date.now();
 
+let userNotes = {
+    title: req.body.title,
+    id: id,
+    text: req.body.text,
+};
+notes.push(userNotes);
+//create jsonstringify into var
+const stringifyNotes = JSON.stringify(notes);
+res.json(notes);
+})
 
 //to do bonus delete note
