@@ -34,3 +34,8 @@ app.get("/notes", (req, res) =>{
  app.listen(PORT, () =>
   console.log(`Example app listening at http://localhost:${PORT}`)
 );
+
+//to do create note post
+
+
+//to do bonus delete note
