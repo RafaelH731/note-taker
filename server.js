@@ -12,11 +12,13 @@ app.use(express.json());
 //connects to the static files in the public folder
 app.use(express.static("public"));
 app.use(express.urlencoded({extended: true}));
-let notes = require("./db/db.json")
+let notes = require("./db/db.json");
+//not sure how this was added
+const { addAbortSignal } = require("stream");
 
 //routes
-app.get("/notes", (req, res) =>{
-    res.sendfile(path.join(__dirname, "public/notes.html"));
+app.get("/notes", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/notes.html"));
 });
 
 //to display notes
@@ -32,23 +34,34 @@ app.get("/notes", (req, res) =>{
 
  //server 
  app.listen(PORT, () =>
-  console.log(`Example app listening at http://localhost:${PORT}`)
+  console.log(`App listening at http://localhost:${PORT}`)
 );
 
 //to do create note post
 app.post("/api/notes", (req, res) => {
-var letters = String.fromCharCode(100 + Math.floor(Math.random() * 26));
+var letters = String.fromCharCode(65 + Math.floor(Math.random() * 26));
 var id = letters + Date.now();
 
-let userNotes = {
-    title: req.body.title,
+let newNote = {
     id: id,
+    title: req.body.title,
     text: req.body.text,
 };
-notes.push(userNotes);
+notes.push(newNote);
 //create jsonstringify into var
 const stringifyNotes = JSON.stringify(notes);
 res.json(notes);
+fs.writeFile("db/db.json", stringifyNotes, (err) => {
+    if (err) console.log(err);
+    else {
+        console.log("Success");
+    }
+});
+});
+
+//catch error route
+app.get("*", (req, res) => {
+res.sendFile(path.join(__dirname, "public/index.html"))
 })
 
 //to do bonus delete note
