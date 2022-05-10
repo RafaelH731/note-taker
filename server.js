@@ -14,23 +14,25 @@ app.use(express.static("public"));
 app.use(express.urlencoded({extended: true}));
 let notes = require("./db/db.json");
 //not sure how this was added
-const { addAbortSignal } = require("stream");
+
+
+
+//to display notes
+ app.get("/api/notes", (req, res) => {
+     fs.readFile("db/db.json", "utf8", function (err, notes){
+         if (err){
+             console.log(err);
+             return;
+
+         } console.log(JSON.parse(notes));
+         res.json(JSON.parse(notes))
+     })
+ });
 
 //routes
 app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "public/notes.html"));
 });
-
-//to display notes
- app.get("/api/notes", (req, res) => {
-     fs.readFile("db/db.json", "utf8", function (err, data){
-         if (err){
-             console.log(err);
-             return;
-         } res.json(notes)
-     })
- });
-
 
  //server 
  app.listen(PORT, () =>
@@ -47,6 +49,7 @@ let newNote = {
     title: req.body.title,
     text: req.body.text,
 };
+console.log(typeof notes);
 notes.push(newNote);
 //create jsonstringify into var
 const stringifyNotes = JSON.stringify(notes);
