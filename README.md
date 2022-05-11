@@ -19,6 +19,6 @@ This application uses express. Use npm i to initialize express.
 
 ## Links
 - GitHub : https://github.com/RafaelH731/note-taker
-- Deployed Application :
+- Deployed Application : https://morning-everglades-15580.herokuapp.com/notes
 
 
