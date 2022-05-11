@@ -5,7 +5,7 @@ const fs = require("fs");
 
 //port
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 //app use functions
 app.use(express.json());
