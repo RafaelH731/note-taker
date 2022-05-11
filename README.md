@@ -14,9 +14,11 @@ This application is meant to take notes on a website and store them on the page 
 This application uses express. Use npm i to initialize express.
 
 ## Screenshots
+- ![NoteTakerLandingPage](images/notetaker-landingpage.png)
+- ![SavePage](images/notetaker-savepage.png)
 
 ## Links
-- GitHub :
+- GitHub : https://github.com/RafaelH731/note-taker
 - Deployed Application :
 
 
